@@ -4,8 +4,9 @@
 
 [Notebook](https://github.com/pabloriera/dmcyt_tp1/blob/master/Introduccion.ipynb)
 
+## Consignas preTP1
 
-[## Consignas preTP1](https://github.com/pabloriera/dmcyt_tp1/blob/master/PreTp1.md)
+[preTP1](https://github.com/pabloriera/dmcyt_tp1/blob/master/PreTp1.md)
 
 ## Datasets
 
