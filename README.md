@@ -4,6 +4,6 @@
 
 [Notebook](https://github.com/pabloriera/dmcyt_tp1/blob/master/Introduccion.ipynb)
 
-## Clonsignas preentrega
+## Ejemplos para abrir datasets
 
 [Notebook](https://github.com/pabloriera/dmcyt_tp1/blob/master/pre_TP1.ipynb)
