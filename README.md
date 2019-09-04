@@ -12,6 +12,9 @@
 
 * [Metadata](https://github.com/pabloriera/dmcyt_tp1/raw/master/data/metadata.csv)
 * [Audio Features](https://github.com/pabloriera/dmcyt_tp1/raw/master/data/audio_features.csv)
+  
+  [Referencia](https://developer.spotify.com/documentation/web-api/reference/object-model/#audio-features-object)
+
 * [Audio Analysis](https://www.dropbox.com/s/gldffl4k2fmgo70/audio_analysis.zip?dl=1)
 
 
