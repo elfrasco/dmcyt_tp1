@@ -289,6 +289,7 @@ def vanDongen(ct):
     return vd
     
 ###########################################################################
+# Plot Silhouette
 def plot_silhouette(n_clusters,cluster_ids,cluster_labels,sample_silhouette_values,silhouette_avg):
     ith_cluster_silhouette_avg = []
     for i in range(n_clusters):
@@ -333,4 +334,5 @@ def plot_silhouette(n_clusters,cluster_ids,cluster_labels,sample_silhouette_valu
     ax1.set_xticks([-0.1, 0, 0.2, 0.4, 0.6, 0.8, 1])
 
     plt.show()
-
+    return ith_cluster_silhouette_avg
+	
