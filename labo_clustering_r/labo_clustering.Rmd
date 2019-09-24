@@ -1,17 +1,18 @@
 ---
 title: "Laboratorio de clustering"
-author: "Marcelo Soria - Juan Kamienkowski"
-date: "DM CyT, 2018"
+author: "Juan Kamienkowski - Pablo Riera"
+date: "DM CyT, 2019"
 output:
-  word_document: default
   html_document:
     df_print: paged
   pdf_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE, echo=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+Esta práctica es una actualización de versiones anteriores (Marcelo Soria, Mariana Landoni).
 
 Para esta practica de laboratorio vamos a usar un dataset que se puede descargar desde [aqui](http://archive.ics.uci.edu/ml/datasets/wiki4HE). Son datos de una encuesta entre profesores de dos universidades españolas sobre uso de Wikipedia como recurso educativo.
 
