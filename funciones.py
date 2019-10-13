@@ -3,13 +3,11 @@
 import numpy as np
 import pandas as pd
 import random
+import matplotlib.pyplot as plt
 from scipy.spatial import distance 
 from sklearn.utils import validation
 from sklearn.metrics import pairwise
 from scipy.sparse import issparse
-
-
-
 
 ## Gower
 def check_pairwise_arrays(X, Y, precomputed=False, dtype=None):
