@@ -10,7 +10,11 @@ import numpy as np
 
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score, silhouette_samples
-    
+
+import random
+
+from sklearn.neighbors import NearestNeighbors
+
 ###########################################################################
 # Van Dongen
 def vanDongen(ct):
@@ -117,3 +121,29 @@ def get_silhouette_avg(df, k):
 def get_sse(df, k):
     km = KMeans(n_clusters = k, random_state = 0).fit(df)
     return km.inertia_
+
+###########################################################################
+# Tendencia al clustering (Hopkins)
+def hopkins(df,*args):
+    n = df.shape[0] # filas
+    d = df.shape[1] # columnas
+    if not args:
+        print("Numero de puntos al azar por defecto")
+        m = int(0.1 * n) # cantidad de puntos al azar (default)
+    else:
+        m = args[0] # cantidad de puntos al azar
+
+    nbrs = NearestNeighbors(n_neighbors=1, algorithm='brute').fit(df) # buscador de vecinos
+
+    rand_ind = random.sample(range(0, n, 1), m) # indices al azar
+
+    ui = []
+    wi = []
+    for j in range(0, m):
+        u_dist, _ = nbrs.kneighbors(np.random.normal(size=(1, d)).reshape(1, -1), 2, return_distance=True) # distancia a los nuevos puntos
+        ui.append(u_dist[0][1])
+        w_dist, _ = nbrs.kneighbors(df[rand_ind[j]].reshape(1, -1), 2, return_distance=True) # distancia a los puntos al azar
+        wi.append(w_dist[0][1])
+
+    H = sum(wi) / (sum(ui) + sum(wi))
+    return H
