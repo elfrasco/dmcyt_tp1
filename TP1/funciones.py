@@ -31,7 +31,7 @@ def vanDongen(ct):
 def plot_silhouette(df, k):
 
     # Se calcula KMeans
-    km = KMeans(n_clusters = k, random_state = 0).fit(df)
+    km = KMeans(n_clusters = k, random_state = 10).fit(df)
     silhouette_avg = silhouette_score(df, km.labels_)
     
     # Se calcula el silhouette de cada observación
@@ -84,6 +84,7 @@ def plot_silhouette(df, k):
 
     plt.show()
     
+    
 ###########################################################################
 # Plot Silhouettes and SSEs
 def plot_silhouettes_and_sses(df, kmax):
@@ -91,7 +92,7 @@ def plot_silhouettes_and_sses(df, kmax):
     sse = []
     sil = []
     for k in range(2, kmax + 1):
-        km = KMeans(n_clusters = k, random_state = 0).fit(df)
+        km = KMeans(n_clusters = k, random_state = 10).fit(df)
         kmeans.append(km)
         sil.append(silhouette_score(df, km.labels_))
         sse.append(km.inertia_)
@@ -111,6 +112,37 @@ def plot_silhouettes_and_sses(df, kmax):
     axsse = fig.add_axes([0.05,0.525,0.9,0.475])
     axsse.set_ylabel("SSE")
     plt.plot(x, sse)
+    return sse, sil
+
+
+def list_plot(xlabel, ylabel, fig, ax, data):
+    #ax_label = fig.add_axes([0.05,0.05,0.9,0.475])
+    ax.set_ylabel(ylabel)
+    ax.set_xlabel(xlabel)
+    ax.grid(True)
+    for x in range(len(data)):
+        ax.step(np.arange(2, len(data[x][0]) + 2), data[x][0], label=data[x][1])
+        ax.plot(np.arange(2, len(data[x][0]) + 2), data[x][0], 'C' + str(x) + 'o', alpha=0.5)  
+
+
+###########################################################################
+#Plot se grafican los sse y coeficientes de silhoutte de varios datasets
+import matplotlib.gridspec as gridspec
+
+def plot_all_silhouettes_and_sses(data_sil, data_sse):
+    # Se abre una figura nueva
+    fig = plt.figure()
+    gs1 = gridspec.GridSpec(2, 1)
+    ax1 = fig.add_subplot(gs1[0])
+    ax2 = fig.add_subplot(gs1[1])
+
+    # Se grafican los silhouttes
+    list_plot('k', 'Silhoutte', fig, ax1, data_sil)
+    list_plot('k', 'SSE', fig, ax2, data_sse)
+    ax2.legend()
+    gs1.tight_layout(fig)
+    
+
 
 ###########################################################################
 # Silhouette Average
