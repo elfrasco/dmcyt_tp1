@@ -119,6 +119,7 @@ def list_plot(xlabel, ylabel, fig, ax, data):
     #ax_label = fig.add_axes([0.05,0.05,0.9,0.475])
     ax.set_ylabel(ylabel)
     ax.set_xlabel(xlabel)
+    ax.set_xticks(np.arange(2, len(data[0][0]) + 2, 1))
     ax.grid(True)
     for x in range(len(data)):
         ax.step(np.arange(2, len(data[x][0]) + 2), data[x][0], label=data[x][1])
@@ -131,15 +132,20 @@ import matplotlib.gridspec as gridspec
 
 def plot_all_silhouettes_and_sses(data_sil, data_sse):
     # Se abre una figura nueva
+    plt.rcParams.update({'font.size': 16})
     fig = plt.figure()
     gs1 = gridspec.GridSpec(2, 1)
     ax1 = fig.add_subplot(gs1[0])
     ax2 = fig.add_subplot(gs1[1])
 
-    # Se grafican los silhouttes
-    list_plot('k', 'Silhoutte', fig, ax1, data_sil)
+    box = ax2.get_position()
+    ax2.set_position([box.x0, box.y0 + box.height * 0.1,
+                 box.width, box.height * 0.9])
+    list_plot('k', 'Silhouette', fig, ax1, data_sil)
     list_plot('k', 'SSE', fig, ax2, data_sse)
-    ax2.legend()
+    ax2.legend(fancybox=True, shadow=True, ncol=3, fontsize=12)
+       
+    
     gs1.tight_layout(fig)
     
 
@@ -147,11 +153,11 @@ def plot_all_silhouettes_and_sses(data_sil, data_sse):
 ###########################################################################
 # Silhouette Average
 def get_silhouette_avg(df, k):
-    km = KMeans(n_clusters = k, random_state = 0).fit(df)
+    km = KMeans(n_clusters = k, random_state = 10).fit(df)
     return silhouette_score(df, km.labels_)
 
 def get_sse(df, k):
-    km = KMeans(n_clusters = k, random_state = 0).fit(df)
+    km = KMeans(n_clusters = k, random_state = 10).fit(df)
     return km.inertia_
 
 ###########################################################################
