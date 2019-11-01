@@ -118,6 +118,6 @@ space = [scope.int(hp.quniform('neighbors', 2, 200, 1)),
 # Iteration: 416
 best = fmin(fn = vanDongenSpectral,
             space = space, algo = tpe.suggest, 
-            max_evals = 500)
+            max_evals = 1000)
 
 print(best)
