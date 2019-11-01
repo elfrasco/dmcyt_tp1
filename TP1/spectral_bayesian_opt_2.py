@@ -100,11 +100,7 @@ def vanDongenSpectral(args):
     # Se aplica KMeans al embedding
     km = KMeans(n_clusters = k, random_state = 0).fit(embedding)
                             
-    # Se calcula la matriz de confusion
-    tmp = pd.DataFrame({'Generos': metadata.genre, 'data': km.labels_})
-    ct = pd.crosstab(tmp['Generos'], tmp['data'])
-                            
-    return vanDongen(ct)
+    return -adjusted_rand_score(metadata.genre, km.labels_)
 
 space = [scope.int(hp.quniform('neighbors', 2, 200, 1)),
          hp.choice('min_d', [0.0, 0.1, 0.25, 0.5, 0.8, 0.99]),
@@ -114,10 +110,8 @@ space = [scope.int(hp.quniform('neighbors', 2, 200, 1)),
          hp.choice('scaler', ["minMax", "standard"]),
          scope.int(hp.quniform('k', 2, 16, 1))]
 
-# {'components': 15.0, 'dataset': 0, 'k': 2.0, 'metric': 5, 'min_d': 1, 'neighbors': 4.0, 'scaler': 1}
-# Iteration: 416
 best = fmin(fn = vanDongenSpectral,
             space = space, algo = tpe.suggest, 
-            max_evals = 500)
+            max_evals = 1000)
 
 print(best)
